@@ -1,0 +1,234 @@
+{
+  "version": "0.0.0",
+  "name": "crafting",
+  "instructions": [
+    {
+      "name": "createFormula",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "formula",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "outputAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "ingredientsCount",
+          "type": "u16"
+        },
+        {
+          "name": "itemsCount",
+          "type": "u16"
+        },
+        {
+          "name": "ingredients",
+          "type": {
+            "vec": {
+              "defined": "Ingredient"
+            }
+          }
+        },
+        {
+          "name": "outputItems",
+          "type": {
+            "vec": {
+              "defined": "Item"
+            }
+          }
+        },
+        {
+          "name": "bump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "accounts": [
+        {
+          "name": "formula",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "pdaAuth",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bump",
+          "type": "u8"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Formula",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "ingredients",
+            "type": {
+              "vec": {
+                "defined": "Ingredient"
+              }
+            }
+          },
+          {
+            "name": "outputItems",
+            "type": {
+              "vec": {
+                "defined": "Item"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "Ingredient",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mint",
+            "type": "publicKey"
+          },
+          {
+            "name": "amount",
+            "type": "u8"
+          },
+          {
+            "name": "burnOnCraft",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Item",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mint",
+            "type": "publicKey"
+          },
+          {
+            "name": "amount",
+            "type": "u8"
+          },
+          {
+            "name": "isMasterEdition",
+            "type": "bool"
+          },
+          {
+            "name": "masterTokenAccount",
+            "type": "publicKey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AuthorityType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "MintTokens"
+          },
+          {
+            "name": "FreezeAccount"
+          },
+          {
+            "name": "AccountOwner"
+          },
+          {
+            "name": "CloseAccount"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 300,
+      "name": "InvalidRemainingAccountsLength",
+      "msg": "Invalid remaining accounts length"
+    },
+    {
+      "code": 301,
+      "name": "InvalidMint",
+      "msg": "Invalid token mint"
+    },
+    {
+      "code": 302,
+      "name": "InvalidAmount",
+      "msg": "Invalid token amount"
+    },
+    {
+      "code": 303,
+      "name": "InvalidAuthority",
+      "msg": "Invalid token authority"
+    },
+    {
+      "code": 304,
+      "name": "TokenAccountOwnerMustBeOutputMintAuthority",
+      "msg": "TokenAccount must be owned by the output mint authority PDA"
+    }
+  ],
+  "metadata": {
+    "address": "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+  }
+}

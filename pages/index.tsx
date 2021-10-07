@@ -1,5 +1,7 @@
 import type { NextPage } from "next";
 import { MainBar, HorizontalSpacer } from "../components/index";
+import DisconnectedScreen from "../components/DisconnectedScreen";
+import MainScreen from "../components/MainScreen";
 import { useState, useEffect, useMemo } from "react";
 import idl from "../public/idl.json";
 import {
@@ -13,9 +15,11 @@ require("@solana/wallet-adapter-react-ui/styles.css");
 
 const Home: NextPage = () => {
   const { connection } = useConnection();
-  const { publicKey, sendTransaction } = useWallet();
+  const { publicKey, sendTransaction, connected, wallet } = useWallet();
 
-  useEffect(() => {});
+  useEffect(() => {
+    console.log(connected);
+  });
 
   return (
     <div>
@@ -24,6 +28,7 @@ const Home: NextPage = () => {
           <WalletMultiButton />
         </WalletModalProvider>
       </MainBar>
+      {connected ? <MainScreen /> : <DisconnectedScreen />}
     </div>
   );
 };

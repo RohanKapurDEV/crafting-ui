@@ -1,8 +1,6 @@
 import { PublicKey } from "@solana/web3.js";
-import * as Sentry from "@sentry/react";
 import React, { createContext, useEffect, useState } from "react";
 import useConnection from "../hooks/useConnection";
-import useNotifications from "../hooks/useNotifications";
 import { isBrowser } from "../utils/isNode";
 import getPhantomAdapter from "../utils/wallet/adapters/phantom";
 
@@ -31,7 +29,6 @@ const WalletContext = createContext<{
 });
 
 const WalletProvider: React.FC = ({ children }) => {
-  const { pushNotification } = useNotifications();
   const { connection } = useConnection();
   const [loading, setLoading] = useState(false);
   const [wallet, setWallet] = useState<WalletAdapter | null>(null);
@@ -77,11 +74,6 @@ const WalletProvider: React.FC = ({ children }) => {
           setBalance(_balance);
         } catch (err) {
           console.error(err);
-          Sentry.captureException(err);
-          pushNotification({
-            severity: "error",
-            message: `${err}`,
-          });
         }
       })();
       // subscribe to wallet balance changes
@@ -95,7 +87,7 @@ const WalletProvider: React.FC = ({ children }) => {
         connection.removeAccountChangeListener(subscription);
       }
     };
-  }, [connection, pubKey, pushNotification]);
+  }, [connection, pubKey]);
 
   // TODO: move all this into a useReducer() state, get rid of useState() here
 

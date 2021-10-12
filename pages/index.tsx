@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
-import { MainBar, HorizontalSpacer } from "../components/index";
-import DisconnectedScreen from "../components/DisconnectedScreen";
-import MainScreen from "../components/MainScreen";
+import { MainBar, HorizontalSpacer } from "../src/components/index";
+import DisconnectedScreen from "../src/components/DisconnectedScreen";
+import MainScreen from "../src/components/MainScreen";
 import { useState, useEffect, useMemo } from "react";
 import idl from "../public/idl.json";
 import {

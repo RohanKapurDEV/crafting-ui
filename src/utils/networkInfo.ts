@@ -1,6 +1,5 @@
 import { clusterApiUrl, PublicKey } from "@solana/web3.js";
 import { TOKENS } from "@project-serum/tokens";
-import { MARKETS } from "@mithraic-labs/serum";
 /* eslint-disable */
 import { MarketMeta } from "@mithraic-labs/market-meta";
 import { ClusterName } from "../types";
@@ -11,7 +10,6 @@ import {
   Token as SPLToken,
   TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
-import { FEE_OWNER_KEY } from "@mithraic-labs/psy-american";
 
 export type Network = {
   name: ClusterName;

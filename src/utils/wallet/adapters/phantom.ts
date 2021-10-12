@@ -25,7 +25,10 @@ class PhantomWalletAdapter extends EventEmitter implements WalletAdapter {
 
   // eslint-disable-next-line
   private get _provider(): PhantomProvider | undefined {
-    return (window as any).solana;
+    if (window?.solana?.isPhantom) {
+      return (window as any).solana;
+    }
+    return undefined;
   }
 
   private _handleConnect = (...args: any) => {

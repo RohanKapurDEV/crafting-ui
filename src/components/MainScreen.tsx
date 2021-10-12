@@ -1,10 +1,5 @@
 import React from "react";
 import { Button, HelperButtonRow, HorizontalSpacer } from "./index";
-import {
-  useWallet,
-  useConnection,
-  useAnchorWallet,
-} from "@solana/wallet-adapter-react";
 import { useState, useEffect, useRef } from "react";
 import {
   Keypair,
@@ -15,25 +10,24 @@ import {
 } from "@solana/web3.js";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 
+import useConnection from "../hooks/useConnection";
+import useWallet from "../hooks/useWallet";
+import { programIdl, useProgram } from "../hooks/useProgram";
+
 export default function MainScreen() {
   const { connection } = useConnection();
-  const { wallet, publicKey, signTransaction } = useWallet();
+  const { wallet, pubKey } = useWallet();
+  const program = useProgram();
 
   const requestAirdrop = async () => {
-    if (!publicKey) throw new WalletNotConnectedError();
+    if (!pubKey) throw new WalletNotConnectedError();
 
     try {
-      const sig = await connection.requestAirdrop(publicKey, LAMPORTS_PER_SOL);
+      const sig = await connection.requestAirdrop(pubKey, LAMPORTS_PER_SOL);
       await connection.confirmTransaction(sig, "confirmed");
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const buildRandomTx = async () => {
-    if (!publicKey) throw new WalletNotConnectedError();
-
-    const tx = new Transaction();
   };
 
   return (

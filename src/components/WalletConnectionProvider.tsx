@@ -7,6 +7,8 @@ import { getPhantomWallet } from "@solana/wallet-adapter-wallets";
 import { clusterApiUrl } from "@solana/web3.js";
 import { FC, useMemo } from "react";
 
+// TODO: REMOVE ALL OF THIS AND REPLACE WITH CUSTOM HOOKS
+
 const WalletConnectionProvider: FC = ({ children }) => {
   // Can be set to 'devnet', 'testnet', or 'mainnet-beta'
   const network = WalletAdapterNetwork.Devnet;

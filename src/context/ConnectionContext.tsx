@@ -14,8 +14,6 @@ export type ConnectionContextType = {
   setConnection: React.Dispatch<React.SetStateAction<Connection>>;
   endpoint?: Network;
   setEndpoint?: React.Dispatch<React.SetStateAction<Network>>;
-  dexProgramId?: PublicKey;
-  graphQLUrl?: string;
 };
 const ConnectionContext = createContext<ConnectionContextType>({
   connection: new Connection(clusterApiUrl("devnet")),

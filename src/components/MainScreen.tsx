@@ -12,11 +12,13 @@ import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 
 import useConnection from "../hooks/useConnection";
 import useWallet from "../hooks/useWallet";
+import { useProvider } from "../hooks/useProvider";
 import { programIdl, useProgram } from "../hooks/useProgram";
 
 export default function MainScreen() {
   const { connection } = useConnection();
   const { wallet, pubKey } = useWallet();
+  const provider = useProvider();
   const program = useProgram();
 
   const requestAirdrop = async () => {

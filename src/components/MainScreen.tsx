@@ -17,7 +17,7 @@ import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 
 export default function MainScreen() {
   const { connection } = useConnection();
-  const { wallet, publicKey } = useWallet();
+  const { wallet, publicKey, signTransaction } = useWallet();
 
   const requestAirdrop = async () => {
     if (!publicKey) throw new WalletNotConnectedError();
@@ -28,6 +28,12 @@ export default function MainScreen() {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const buildRandomTx = async () => {
+    if (!publicKey) throw new WalletNotConnectedError();
+
+    const tx = new Transaction();
   };
 
   return (

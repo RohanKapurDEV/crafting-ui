@@ -14,11 +14,10 @@ import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 require("@solana/wallet-adapter-react-ui/styles.css");
 
 const Home: NextPage = () => {
-  const { connection } = useConnection();
-  const { publicKey, sendTransaction, connected, wallet } = useWallet();
+  const { publicKey, connected } = useWallet();
 
   useEffect(() => {
-    console.log(connected);
+    console.log(publicKey ? publicKey : "Nothing");
   });
 
   return (

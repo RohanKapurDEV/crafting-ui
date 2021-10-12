@@ -18,7 +18,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "utils/metadata_utils.ts"
+    "src/utils/metadata_utils.ts"
   ],
   "exclude": ["node_modules"]
 }

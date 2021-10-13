@@ -15,6 +15,7 @@ export type ConnectionContextType = {
   endpoint?: Network;
   setEndpoint?: React.Dispatch<React.SetStateAction<Network>>;
 };
+
 const ConnectionContext = createContext<ConnectionContextType>({
   connection: new Connection(clusterApiUrl("devnet")),
   setConnection: () => {},

@@ -9,23 +9,34 @@ import {
   WalletDisconnectButton,
   WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
-import { useWallet, useConnection } from "@solana/wallet-adapter-react";
+import useWallet from "../src/hooks/useWallet";
+import { useProgram } from "../src/hooks/useProgram";
+import { WalletProvider } from "../src/context/WalletContext";
+import { ConnectionContext } from "../src/context/ConnectionContext";
+import ConnectButton from "../src/components/ConnectButton";
 
 require("@solana/wallet-adapter-react-ui/styles.css");
 
 const Home: NextPage = () => {
-  const { publicKey, connected } = useWallet();
+  const { pubKey, wallet, connected } = useWallet();
+  const program = useProgram();
+
+  const buttonText = () => {
+    if (connected) {
+      return "Disconnect wallet";
+    } else {
+      return "Connect to wallet";
+    }
+  };
 
   useEffect(() => {
-    console.log(publicKey ? publicKey : "Nothing");
+    console.log(pubKey?.toString());
   });
 
   return (
     <div>
       <MainBar>
-        <WalletModalProvider>
-          <WalletMultiButton />
-        </WalletModalProvider>
+        <ConnectButton>{buttonText()}</ConnectButton>
       </MainBar>
       {connected ? <MainScreen /> : <DisconnectedScreen />}
     </div>

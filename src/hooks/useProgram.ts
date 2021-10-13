@@ -11,7 +11,7 @@ export const useProgram = (): Program | null => {
   const { endpoint } = useConnection();
   const provider = useProvider();
 
-  if (!endpoint?.programId) throw Error("Endpoint is not defined :(");
+  if (!endpoint?.programId) return null;
 
   return useMemo(() => {
     if (endpoint.programId && provider) {

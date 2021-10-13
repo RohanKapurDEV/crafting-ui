@@ -1,19 +1,12 @@
 import "../styles/globals.css";
-import dynamic from "next/dynamic";
 import type { AppProps } from "next/app";
-
-const WalletConnectionProvider = dynamic(
-  () => import("../src/components/WalletConnectionProvider"),
-  {
-    ssr: false,
-  }
-);
+import Store from "../src/context/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <WalletConnectionProvider>
+    <Store>
       <Component {...pageProps} />
-    </WalletConnectionProvider>
+    </Store>
   );
 }
 export default MyApp;

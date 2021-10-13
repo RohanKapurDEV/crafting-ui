@@ -9,8 +9,17 @@ import {
   Commitment,
 } from "@solana/web3.js";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
+import { useProgram } from "../hooks/useProgram";
+import useWallet from "../hooks/useWallet";
 
 export default function MainScreen() {
+  const program = useProgram();
+  const wallet = useWallet();
+
+  useEffect(() => {
+    // console.log(program?.provider.wallet.publicKey);
+  }, []);
+
   return (
     <div>
       <HelperButtonRow>
